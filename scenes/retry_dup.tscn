@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://db3fkk8w4f1hv"]
+
+[ext_resource type="Script" uid="uid://b34yajxsfvcca" path="res://scripts/button_free.gd" id="1_4ni47"]
+[ext_resource type="Texture2D" uid="uid://ccexpcp6wg6h3" path="res://assets/retry_current_level.png" id="1_xu6tg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sx3uy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2iy26"]
+size = Vector2(312, 89)
+
+[node name="retry" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_sx3uy")
+script = ExtResource("1_4ni47")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xu6tg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_2iy26")
+one_way_collision = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
