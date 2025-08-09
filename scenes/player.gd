@@ -10,7 +10,7 @@ var acceleration : float = 50.0
 var friction : float = 10.0
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
-
+@onready var sprite : Sprite2D = $Sprite2D
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -19,7 +19,6 @@ func _physics_process(delta: float) -> void:
 	var velocity_weight : float = delta * (acceleration if x_input else friction)
 	velocity.x = lerp(velocity.x, x_input * speed, velocity_weight)
 
-	
 	if not is_on_floor():
 		velocity += get_gravity() * delta * 7.0
 		animation_player.play("jump")
@@ -37,10 +36,10 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction := Input.get_axis("left", "right")
-	#if direction:
-	#	velocity.x = direction * SPEED
-	#else:
-	#	velocity.x = move_toward(velocity.x, 0, SPEED)
+	var direction := Input.get_axis("left", "right")
+	if direction < 0:
+		sprite.flip_h = true
+	elif direction > 0:
+		sprite.flip_h = false
 
 	move_and_slide()
