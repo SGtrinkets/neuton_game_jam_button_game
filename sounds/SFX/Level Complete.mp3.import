@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://0l2oojubrlk3"
+path="res://.godot/imported/Level Complete.mp3-09187a35ec82abb37c5f42b5ebb96b04.mp3str"
+
+[deps]
+
+source_file="res://sounds/SFX/Level Complete.mp3"
+dest_files=["res://.godot/imported/Level Complete.mp3-09187a35ec82abb37c5f42b5ebb96b04.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

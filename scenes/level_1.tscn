@@ -25,8 +25,9 @@ tile_map_data = PackedByteArray("AAAAAA8AAAACAAQAAAABAA8AAAAEAAQAAAACAA8AAAAFAAQ
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
+offset = Vector2(0, -70)
 limit_left = 0
-limit_right = 1920
+limit_right = 1280
 limit_bottom = 720
 position_smoothing_enabled = true
 editor_draw_limits = true

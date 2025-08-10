@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bpyqa4k32noxc"
+path="res://.godot/imported/Scrapped Audio.wav-d867c91182fd26ebdd7a3750c3a5b02d.sample"
+
+[deps]
+
+source_file="res://sounds/BGM/Other/Scrapped Audio.wav"
+dest_files=["res://.godot/imported/Scrapped Audio.wav-d867c91182fd26ebdd7a3750c3a5b02d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

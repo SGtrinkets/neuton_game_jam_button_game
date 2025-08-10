@@ -11,6 +11,7 @@ var friction : float = 10.0
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var sprite : Sprite2D = $Sprite2D
+@onready var run_sound : AudioStreamPlayer2D = $run
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -18,12 +19,14 @@ func _physics_process(delta: float) -> void:
 	var x_input : float = Input.get_action_strength("right") - Input.get_action_strength("left")
 	var velocity_weight : float = delta * (acceleration if x_input else friction)
 	velocity.x = lerp(velocity.x, x_input * speed, velocity_weight)
+	
+	var movement_threshold := 50.0  # Small threshold to avoid flicker between idle and run
 
 	if not is_on_floor():
 		velocity += get_gravity() * delta * 7.0
 		animation_player.play("jump")
 	else:
-		if velocity.x:
+		if abs(velocity.x) > movement_threshold:
 			animation_player.play("run")
 		else:
 			animation_player.play("idle")
