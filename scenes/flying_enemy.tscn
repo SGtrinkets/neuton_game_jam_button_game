@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://bpd87xcqrl7pd"]
+
+[ext_resource type="Script" uid="uid://b0tm60ab72a5e" path="res://scripts/enemy.gd" id="1_fgwew"]
+[ext_resource type="Texture2D" uid="uid://b7wrrxhotw8th" path="res://assets/Bird_Bastard.png" id="2_c4a5w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p1mj"]
+size = Vector2(23, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
+size = Vector2(18, 4.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
+size = Vector2(175, 202)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5uy6h"]
+size = Vector2(20, 16.5)
+
+[sub_resource type="Animation" id="Animation_md0e3"]
+resource_name = "death"
+length = 0.1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ra3w"]
+_data = {
+&"death": SubResource("Animation_md0e3")
+}
+
+[node name="enemy" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_fgwew")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_c4a5w")
+hframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 6)
+shape = SubResource("RectangleShape2D_7p1mj")
+
+[node name="head_detect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="head_detect"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_4ra3w")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="player_detect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detect"]
+position = Vector2(3, 120)
+shape = SubResource("RectangleShape2D_md0e3")
+
+[node name="block_detect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="block_detect"]
+position = Vector2(-0.5, 6)
+shape = SubResource("RectangleShape2D_5uy6h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4ra3w")
+}
+
+[connection signal="body_entered" from="head_detect" to="." method="_on_head_detect_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="player_detect" to="." method="_on_player_detect_body_entered"]
+[connection signal="body_entered" from="block_detect" to="." method="_on_block_detect_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

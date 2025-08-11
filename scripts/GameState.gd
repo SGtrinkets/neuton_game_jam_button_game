@@ -3,7 +3,9 @@ extends Node
 var state := {
 	"level" : 1,
 	"pause": false,
-	"button_set":false
+	"button_set":false,
+	"goal_reached": false,
+	"dead" : false
 }
 
 func has_value(key):

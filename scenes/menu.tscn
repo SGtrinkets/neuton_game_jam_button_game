@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://du0sdtsjeh2mw"]
+[gd_scene load_steps=7 format=3 uid="uid://du0sdtsjeh2mw"]
 
 [ext_resource type="Script" uid="uid://6l5icax7ic7y" path="res://scripts/menu.gd" id="1_vjb58"]
+[ext_resource type="Texture2D" uid="uid://ecl7yyxhn134" path="res://assets/The_Blue_Menace_Titlescreen.png" id="2_con2f"]
 [ext_resource type="Theme" uid="uid://758a86rjoymm" path="res://assets/theme.tres" id="2_vjb58"]
+[ext_resource type="FontFile" uid="uid://dkxfstws7ia8r" path="res://assets/Xav_button_font-Regular.ttf" id="4_g3eks"]
+[ext_resource type="Script" uid="uid://caa3fw1c8ve2h" path="res://scripts/audio.gd" id="4_mhnvy"]
+[ext_resource type="AudioStream" uid="uid://bpyqa4k32noxc" path="res://sounds/BGM/Other/Scrapped Audio.wav" id="5_4ytvr"]
 
 [node name="menu" type="Control"]
 layout_mode = 3
@@ -12,36 +16,193 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vjb58")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(640.244, 361.075)
+scale = Vector2(0.666921, 0.666806)
+texture = ExtResource("2_con2f")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -566.0
+offset_top = -76.0
+offset_right = -155.0
+offset_bottom = 381.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="main_menu" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="start" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="start" type="Button" parent="MarginContainer/HBoxContainer/main_menu"]
 layout_mode = 2
 theme = ExtResource("2_vjb58")
-theme_override_font_sizes/font_size = 61
+theme_override_font_sizes/font_size = 31
 text = "start"
 
-[node name="options" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="options" type="Button" parent="MarginContainer/HBoxContainer/main_menu"]
 layout_mode = 2
 theme = ExtResource("2_vjb58")
-theme_override_font_sizes/font_size = 61
+theme_override_font_sizes/font_size = 31
 text = "options"
 
-[node name="quit" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="quit" type="Button" parent="MarginContainer/HBoxContainer/main_menu"]
 layout_mode = 2
 theme = ExtResource("2_vjb58")
-theme_override_font_sizes/font_size = 61
+theme_override_font_sizes/font_size = 31
 text = "quit"
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]
+[node name="option_menu" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="audio" type="Button" parent="MarginContainer/HBoxContainer/option_menu"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_vjb58")
+theme_override_font_sizes/font_size = 30
+text = "Audio"
+
+[node name="controls" type="Button" parent="MarginContainer/HBoxContainer/option_menu"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_vjb58")
+theme_override_font_sizes/font_size = 30
+text = "Controls"
+
+[node name="back_to_menu" type="Button" parent="MarginContainer/HBoxContainer/option_menu"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_vjb58")
+theme_override_font_sizes/font_size = 30
+text = "Back to Pause"
+
+[node name="audio_menu" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/audio_menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.603922, 0.556863, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("4_g3eks")
+theme_override_font_sizes/font_size = 40
+text = "Master "
+
+[node name="Master" type="HSlider" parent="MarginContainer/HBoxContainer/audio_menu"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("4_mhnvy")
+bus_name = "Master"
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/audio_menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.603922, 0.556863, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("4_g3eks")
+theme_override_font_sizes/font_size = 40
+text = "SFX"
+
+[node name="SFX" type="HSlider" parent="MarginContainer/HBoxContainer/audio_menu"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("4_mhnvy")
+bus_name = "SFX"
+
+[node name="Label3" type="Label" parent="MarginContainer/HBoxContainer/audio_menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.603922, 0.556863, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("4_g3eks")
+theme_override_font_sizes/font_size = 40
+text = "Music"
+
+[node name="Music" type="HSlider" parent="MarginContainer/HBoxContainer/audio_menu"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("4_mhnvy")
+bus_name = "Music"
+
+[node name="back_to_options" type="Button" parent="MarginContainer/HBoxContainer/audio_menu"]
+layout_mode = 2
+theme = ExtResource("2_vjb58")
+text = "Back to Options"
+
+[node name="control_menu" type="Control" parent="MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/control_menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -186.0
+offset_right = 249.0
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/control_menu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_g3eks")
+text = "Left: A
+Right: D
+Jump: W
+Pause: Esc"
+horizontal_alignment = 1
+
+[node name="back_to_options" type="Button" parent="MarginContainer/HBoxContainer/control_menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_vjb58")
+text = "Back to Options"
+
+[node name="menu_music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_4ytvr")
+autoplay = true
+bus = &"Music"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_right = 1287.0
+offset_bottom = 726.0
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/main_menu/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/main_menu/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/main_menu/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/option_menu/audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/option_menu/controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/option_menu/back_to_menu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/audio_menu/back_to_options" to="." method="_on_back_to_options_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/control_menu/VBoxContainer/back_to_options" to="." method="_on_back_to_options_pressed"]

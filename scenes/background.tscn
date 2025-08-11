@@ -125,4 +125,5 @@ texture = ExtResource("1_bkp1e")
 sources/0 = SubResource("TileSetAtlasSource_y0upk")
 
 [node name="background" type="TileMapLayer"]
+texture_filter = 1
 tile_set = SubResource("TileSet_jougr")

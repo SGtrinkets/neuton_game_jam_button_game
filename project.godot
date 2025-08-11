@@ -31,6 +31,9 @@ project/assembly_name="neumont"
 [global_group]
 
 player=""
+bomb=""
+lava=""
+button_platform=""
 
 [input]
 

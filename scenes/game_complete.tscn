@@ -1,0 +1,141 @@
+[gd_scene load_steps=9 format=3 uid="uid://rkge1bnlin58"]
+
+[ext_resource type="Script" uid="uid://bn8cjnuh4jtyc" path="res://scripts/game_complete.gd" id="1_d1qp4"]
+[ext_resource type="Texture2D" uid="uid://1ugd6xiwfwa5" path="res://assets/Victory_Screen_Blank.png" id="1_rqthc"]
+[ext_resource type="FontFile" uid="uid://dkxfstws7ia8r" path="res://assets/Xav_button_font-Regular.ttf" id="2_d1qp4"]
+[ext_resource type="Theme" uid="uid://758a86rjoymm" path="res://assets/theme.tres" id="3_fdoju"]
+[ext_resource type="AudioStream" uid="uid://ctp0serc50mpe" path="res://sounds/BGM/Game Complete BGM V5.wav" id="5_fdoju"]
+
+[sub_resource type="Animation" id="Animation_hydus"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("celebration_theme:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_hmvr6"]
+resource_name = "game_complete"
+length = 30.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("celebration_theme:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.4, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ul8ck"]
+_data = {
+&"RESET": SubResource("Animation_hydus"),
+&"game_complete": SubResource("Animation_hmvr6")
+}
+
+[node name="game_complete" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d1qp4")
+
+[node name="LevelCompletedBlank" type="Sprite2D" parent="."]
+position = Vector2(641.523, 360.398)
+scale = Vector2(0.676, 0.675)
+texture = ExtResource("1_rqthc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -66.0
+offset_top = 140.0
+offset_right = 66.0
+offset_bottom = 163.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.706349, 0.722496, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("2_d1qp4")
+theme_override_font_sizes/font_size = 51
+text = "thank you
+for playing"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -24.0
+offset_right = 103.0
+offset_bottom = 169.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="menu" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_fdoju")
+text = "back to main menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ul8ck")
+}
+
+[node name="celebration_theme" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fdoju")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1290.0
+offset_bottom = 724.0
+color = Color(0, 0, 0, 1)

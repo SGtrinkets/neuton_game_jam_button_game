@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://baos5q83gch3l"
+path="res://.godot/imported/Game Complete BGM V4.wav-f7295ad32cfa4f3a21f6cb4028ba14f9.sample"
+
+[deps]
+
+source_file="res://sounds/BGM/Game Complete BGM V4.wav"
+dest_files=["res://.godot/imported/Game Complete BGM V4.wav-f7295ad32cfa4f3a21f6cb4028ba14f9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

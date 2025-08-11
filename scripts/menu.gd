@@ -1,10 +1,22 @@
 extends Control
 
+@onready var main_menu : VBoxContainer = $MarginContainer/HBoxContainer/main_menu
+@onready var option_menu: VBoxContainer = $MarginContainer/HBoxContainer/option_menu
+@onready var audio_menu: VBoxContainer = $MarginContainer/HBoxContainer/audio_menu
+@onready var control_menu: Control = $MarginContainer/HBoxContainer/control_menu
+
+const first_level = preload("res://scenes/level_1.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	main_menu.show()
+	audio_menu.hide()
+	control_menu.hide()
+	option_menu.hide()
+	GameState.set_value("level", 1)
+	GameState.set_value("pause", false)
+	GameState.set_value("button_set", false)
+	GameState.set_value("goal_reached", false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -12,12 +24,34 @@ func _process(delta: float) -> void:
 
 
 func _on_start_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_packed(first_level)
 
 
 func _on_options_pressed() -> void:
-	pass # Replace with function body.
+	main_menu.hide()
+	option_menu.show()
 
 
 func _on_quit_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().quit()
+
+
+func _on_back_to_options_pressed() -> void:
+	audio_menu.hide()
+	control_menu.hide()
+	option_menu.show()
+
+
+func _on_audio_pressed() -> void:
+	option_menu.hide()
+	audio_menu.show()
+
+
+func _on_controls_pressed() -> void:
+	option_menu.hide()
+	control_menu.show()
+
+
+func _on_back_to_menu_pressed() -> void:
+	option_menu.hide()
+	main_menu.show()

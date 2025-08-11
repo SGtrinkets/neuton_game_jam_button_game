@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://nu6oc5ahkq2h"]
+[gd_scene load_steps=7 format=3 uid="uid://nu6oc5ahkq2h"]
 
 [ext_resource type="Texture2D" uid="uid://b576jg45druhg" path="res://assets/tileset_dev.png" id="1_s24c1"]
+[ext_resource type="Texture2D" uid="uid://yelofpt4vtjq" path="res://assets/Bastard_Bird_Block.png" id="2_ql1m3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ql1m3"]
 
@@ -239,10 +240,23 @@ texture = ExtResource("1_s24c1")
 11:9/0 = 0
 11:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dstbn"]
+texture = ExtResource("2_ql1m3")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
 [sub_resource type="TileSet" id="TileSet_dstbn"]
 physics_layer_0/collision_layer = 1
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_ql1m3")
 sources/0 = SubResource("TileSetAtlasSource_4fskk")
+sources/1 = SubResource("TileSetAtlasSource_dstbn")
 
 [node name="tileset" type="TileMapLayer"]
+texture_filter = 1
 tile_set = SubResource("TileSet_dstbn")

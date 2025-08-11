@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://dko7omtpisi4j"]
 
 [ext_resource type="Script" uid="uid://cuokpl7p75fy2" path="res://scripts/flag.gd" id="1_32e5v"]
-[ext_resource type="Texture2D" uid="uid://dycyte6nwjrd7" path="res://assets/flag animation.png" id="1_76ss4"]
+[ext_resource type="Texture2D" uid="uid://btsye4tt3u04i" path="res://assets/custom_flag.png" id="2_32e5v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32e5v"]
-size = Vector2(29, 50)
+size = Vector2(29, 57.5)
 
 [sub_resource type="Animation" id="Animation_tjkec"]
 length = 0.001
@@ -51,18 +51,20 @@ script = ExtResource("1_32e5v")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
-position = Vector2(19, 0)
-texture = ExtResource("1_76ss4")
+scale = Vector2(2, 2)
+texture = ExtResource("2_32e5v")
 hframes = 5
 frame = 1
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(9.5, 3)
+position = Vector2(-0.5, 2.75)
 shape = SubResource("RectangleShape2D_32e5v")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_s5mf2")
 }
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

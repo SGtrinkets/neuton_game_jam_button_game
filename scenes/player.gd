@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+@export var bonus_jump_height = -3800
 const JUMP_VELOCITY = -1700.0
 var gravity : float = 150.0
 
@@ -11,10 +11,28 @@ var friction : float = 10.0
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var sprite : Sprite2D = $Sprite2D
-@onready var run_sound : AudioStreamPlayer2D = $run
+@onready var footstep_audio : AudioStreamPlayer2D = $footstep
+@onready var footstep_timer : Timer = $footstep_timer
+
+const level_complete = preload("res://scenes/level_complete.tscn")
+const game_complete = preload("res://scenes/game_complete.tscn")
+#const death = preload("res://scenes/level_1.tscn")
+
+func _play_footstep_audio():
+	if !footstep_audio.playing:
+		footstep_audio.pitch_scale = randf_range(0.8, 1.2)
+		footstep_audio.play()
+		footstep_timer.start()
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
+	
+	if GameState.get_value("goal_reached"):
+		velocity = Vector2.ZERO        # Freeze velocity
+		move_and_slide()               # Keep physics stable
+		animation_player.play("victory")
+		return                         # Skip the rest of the code
 	
 	var x_input : float = Input.get_action_strength("right") - Input.get_action_strength("left")
 	var velocity_weight : float = delta * (acceleration if x_input else friction)
@@ -46,3 +64,17 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = false
 
 	move_and_slide()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "victory" and GameState.get_value("level") != 3:
+		get_tree().change_scene_to_packed(level_complete)
+	elif anim_name == "victory" and GameState.get_value("level") == 3:
+		get_tree().change_scene_to_packed(game_complete)
+
+func _on_area_collision_body_entered(body: Node2D) -> void:
+	if body.is_in_group("lava"):
+		animation_player.play()
+	if body.is_in_group("enemy"):
+		if velocity.y > 0:
+			velocity.y = bonus_jump_height

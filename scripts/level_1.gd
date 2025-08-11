@@ -15,9 +15,9 @@ var buttons_set : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GameState.set_value("level", 1)
 	GameState.set_value("pause", false)
 	GameState.set_value("button_set", false)
+	GameState.set_value("goal_reached", false)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

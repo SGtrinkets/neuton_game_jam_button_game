@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dodu41cw0el0o"]
+[gd_scene load_steps=6 format=3 uid="uid://dodu41cw0el0o"]
 
 [ext_resource type="Texture2D" uid="uid://bxiagwqdai72w" path="res://assets/main_menu.png" id="1_ijli7"]
 [ext_resource type="Script" uid="uid://b34yajxsfvcca" path="res://scripts/button_free.gd" id="1_wso1g"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2iy26"]
 size = Vector2(265, 89)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wso1g"]
+size = Vector2(209, 64)
 
 [node name="options" type="StaticBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_sx3uy")
@@ -24,4 +27,12 @@ one_way_collision = true
 wait_time = 5.0
 autostart = true
 
+[node name="Area2D" type="Area2D" parent="." groups=["button_platform"]]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_wso1g")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
