@@ -10,6 +10,7 @@ extends CharacterBody2D
 const bomb_scene = preload("res://scenes/bomb.tscn")
 
 var player_detected: bool = false
+var dead: bool = false
 
 func _ready() -> void:
 	# Connect signals locally so each enemy handles its own detection
@@ -20,18 +21,20 @@ func _ready() -> void:
 	enemy_timer.timeout.connect(_on_timer_timeout)
 	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
 
-	enemy_timer.start()
+	if !dead:
+		enemy_timer.start()
 
 # Player stomps enemy's head
 func _on_head_detect_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		animation_player.play("death")
+		dead = true
 
 # Bomb spawn logic
 func _on_timer_timeout() -> void:
 	sprite.flip_h = !sprite.flip_h
 	
-	if player_detected:
+	if player_detected and !dead:
 		var bomb = bomb_scene.instantiate()
 		get_parent().add_child(bomb)
 
@@ -52,7 +55,8 @@ func _on_player_detect_body_entered(body: Node2D) -> void:
 # Enemy hits block platform
 func _on_block_detect_body_entered(body: Node2D) -> void:
 	if body.is_in_group("button_platform"):
-		queue_free()
+		animation_player.play("death")
+		dead = true
 
 # Animation death cleanup
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -62,4 +66,5 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_block_detect_area_entered(area: Area2D) -> void:
 	if area.is_in_group("button_platform"):
-		queue_free()
+		animation_player.play("death")
+		dead = true

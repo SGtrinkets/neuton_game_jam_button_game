@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvojk1y6sxmua"]
+[gd_scene load_steps=12 format=3 uid="uid://dvojk1y6sxmua"]
 
 [ext_resource type="Script" uid="uid://b0tm60ab72a5e" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://b7wrrxhotw8th" path="res://assets/Bird_Bastard.png" id="2_md0e3"]
+[ext_resource type="Texture2D" uid="uid://b2ldpdybgvnwq" path="res://assets/The_Blue_Rizzler.png" id="3_5uy6h"]
+[ext_resource type="AudioStream" uid="uid://beu4l1rbohe1j" path="res://sounds/SFX/Vine Boom.wav" id="4_c4w8v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7p1mj"]
 size = Vector2(23, 18)
@@ -17,10 +19,86 @@ size = Vector2(20, 16.5)
 
 [sub_resource type="Animation" id="Animation_md0e3"]
 resource_name = "death"
-length = 0.1
+length = 2.88
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("death_sound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 1.75346),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("mog_photo:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.09, 0.1, 2.73333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xwavj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("death_sound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("mog_photo:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4ra3w"]
 _data = {
+&"RESET": SubResource("Animation_xwavj"),
 &"death": SubResource("Animation_md0e3")
 }
 
@@ -32,6 +110,11 @@ script = ExtResource("1_md0e3")
 texture_filter = 1
 texture = ExtResource("2_md0e3")
 hframes = 2
+
+[node name="mog_photo" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("3_5uy6h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 6)
@@ -62,6 +145,9 @@ shape = SubResource("RectangleShape2D_5uy6h")
 libraries = {
 &"": SubResource("AnimationLibrary_4ra3w")
 }
+
+[node name="death_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_c4w8v")
 
 [connection signal="body_entered" from="head_detect" to="." method="_on_head_detect_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

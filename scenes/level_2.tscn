@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://c5883gykpdpou"]
+[gd_scene load_steps=11 format=4 uid="uid://c5883gykpdpou"]
 
 [ext_resource type="Script" uid="uid://beh7qa2kvare7" path="res://scripts/level_1.gd" id="1_ne2mo"]
 [ext_resource type="PackedScene" uid="uid://cafw6hfc6tpyq" path="res://scenes/background.tscn" id="2_6cvei"]
@@ -9,57 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://doki8r0mndhmf" path="res://scenes/lava.tscn" id="7_fldb1"]
 [ext_resource type="PackedScene" uid="uid://dko7omtpisi4j" path="res://scenes/flag.tscn" id="8_guvtl"]
 [ext_resource type="PackedScene" uid="uid://dvojk1y6sxmua" path="res://scenes/enemy.tscn" id="9_6cvei"]
-[ext_resource type="Script" uid="uid://b0tm60ab72a5e" path="res://scripts/enemy.gd" id="9_hey2k"]
-[ext_resource type="Texture2D" uid="uid://b7wrrxhotw8th" path="res://assets/Bird_Bastard.png" id="10_172wr"]
 [ext_resource type="AudioStream" uid="uid://c28c26fm7e7ct" path="res://sounds/BGM/Gameplay BGM.wav" id="12_172wr"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p1mj"]
-size = Vector2(23, 18)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hey2k"]
-size = Vector2(18, 4.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_172wr"]
-size = Vector2(797.5, 191)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2hoc"]
-size = Vector2(20, 16.5)
-
-[sub_resource type="Animation" id="Animation_md0e3"]
-resource_name = "death"
-length = 0.1
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ra3w"]
-_data = {
-&"death": SubResource("Animation_md0e3")
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fldb1"]
-size = Vector2(18, 4.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_guvtl"]
-size = Vector2(797.5, 191)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_igmy8"]
-size = Vector2(20, 16.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
-size = Vector2(18, 4.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(797.5, 191)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5uy6h"]
-size = Vector2(20, 16.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdtqu"]
-size = Vector2(18, 4.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7qsfm"]
-size = Vector2(797.5, 191)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bv48q"]
-size = Vector2(20, 16.5)
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_ne2mo")
@@ -117,126 +67,6 @@ rising_speed = 20
 position = Vector2(645, -4544)
 scale = Vector2(2, 2)
 
-[node name="enemy" type="CharacterBody2D" parent="."]
-position = Vector2(677, -711)
-scale = Vector2(2, 2)
-script = ExtResource("9_hey2k")
-
-[node name="Sprite2D" type="Sprite2D" parent="enemy"]
-texture_filter = 1
-texture = ExtResource("10_172wr")
-hframes = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
-position = Vector2(-0.5, 6)
-shape = SubResource("RectangleShape2D_7p1mj")
-
-[node name="head_detect" type="Area2D" parent="enemy"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy/head_detect"]
-position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_hey2k")
-
-[node name="Timer" type="Timer" parent="enemy"]
-wait_time = 3.0
-
-[node name="player_detect" type="Area2D" parent="enemy"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy/player_detect"]
-position = Vector2(3, 112)
-shape = SubResource("RectangleShape2D_172wr")
-
-[node name="block_detect" type="Area2D" parent="enemy"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy/block_detect"]
-position = Vector2(-0.5, 6)
-shape = SubResource("RectangleShape2D_g2hoc")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="enemy"]
-libraries = {
-&"": SubResource("AnimationLibrary_4ra3w")
-}
-
-[node name="enemy2" type="CharacterBody2D" parent="."]
-position = Vector2(1000, -1430)
-scale = Vector2(2, 2)
-script = ExtResource("9_hey2k")
-
-[node name="Sprite2D" type="Sprite2D" parent="enemy2"]
-texture_filter = 1
-texture = ExtResource("10_172wr")
-hframes = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy2"]
-position = Vector2(-0.5, 6)
-shape = SubResource("RectangleShape2D_7p1mj")
-
-[node name="head_detect" type="Area2D" parent="enemy2"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy2/head_detect"]
-position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_fldb1")
-
-[node name="Timer" type="Timer" parent="enemy2"]
-wait_time = 3.0
-
-[node name="player_detect" type="Area2D" parent="enemy2"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy2/player_detect"]
-position = Vector2(3, 112)
-shape = SubResource("RectangleShape2D_guvtl")
-
-[node name="block_detect" type="Area2D" parent="enemy2"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy2/block_detect"]
-position = Vector2(-0.5, 6)
-shape = SubResource("RectangleShape2D_igmy8")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="enemy2"]
-libraries = {
-&"": SubResource("AnimationLibrary_4ra3w")
-}
-
-[node name="enemy3" type="CharacterBody2D" parent="."]
-position = Vector2(200, -3190)
-scale = Vector2(2, 2)
-script = ExtResource("9_hey2k")
-
-[node name="Sprite2D" type="Sprite2D" parent="enemy3"]
-texture_filter = 1
-texture = ExtResource("10_172wr")
-hframes = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy3"]
-position = Vector2(-0.5, 6)
-shape = SubResource("RectangleShape2D_7p1mj")
-
-[node name="head_detect" type="Area2D" parent="enemy3"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy3/head_detect"]
-position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_4ra3w")
-
-[node name="Timer" type="Timer" parent="enemy3"]
-wait_time = 3.0
-
-[node name="player_detect" type="Area2D" parent="enemy3"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy3/player_detect"]
-position = Vector2(3, 112)
-shape = SubResource("RectangleShape2D_md0e3")
-
-[node name="block_detect" type="Area2D" parent="enemy3"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy3/block_detect"]
-position = Vector2(-0.5, 6)
-shape = SubResource("RectangleShape2D_5uy6h")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="enemy3"]
-libraries = {
-&"": SubResource("AnimationLibrary_4ra3w")
-}
-
 [node name="enemy4" parent="." instance=ExtResource("9_6cvei")]
 position = Vector2(638, -3190)
 
@@ -246,65 +76,19 @@ position = Vector2(641, -3870)
 [node name="enemy6" parent="." instance=ExtResource("9_6cvei")]
 position = Vector2(1080, -3870)
 
-[node name="enemy7" type="CharacterBody2D" parent="."]
-position = Vector2(641, -2150)
-scale = Vector2(2, 2)
-script = ExtResource("9_hey2k")
+[node name="enemy" parent="." instance=ExtResource("9_6cvei")]
+position = Vector2(681, -712)
 
-[node name="Sprite2D" type="Sprite2D" parent="enemy7"]
-texture_filter = 1
-texture = ExtResource("10_172wr")
-hframes = 2
+[node name="enemy2" parent="." instance=ExtResource("9_6cvei")]
+position = Vector2(1000, -1431)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy7"]
-position = Vector2(-0.5, 6)
-shape = SubResource("RectangleShape2D_7p1mj")
-
-[node name="head_detect" type="Area2D" parent="enemy7"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy7/head_detect"]
-position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_wdtqu")
-
-[node name="Timer" type="Timer" parent="enemy7"]
-wait_time = 3.0
-
-[node name="player_detect" type="Area2D" parent="enemy7"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy7/player_detect"]
-position = Vector2(3, 112)
-shape = SubResource("RectangleShape2D_7qsfm")
-
-[node name="block_detect" type="Area2D" parent="enemy7"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy7/block_detect"]
-position = Vector2(-0.5, 6)
-shape = SubResource("RectangleShape2D_bv48q")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="enemy7"]
-libraries = {
-&"": SubResource("AnimationLibrary_4ra3w")
-}
-
-[connection signal="body_entered" from="enemy/head_detect" to="enemy" method="_on_head_detect_body_entered"]
-[connection signal="timeout" from="enemy/Timer" to="enemy" method="_on_timer_timeout"]
-[connection signal="body_entered" from="enemy/player_detect" to="enemy" method="_on_player_detect_body_entered"]
-[connection signal="area_entered" from="enemy/block_detect" to="enemy" method="_on_block_detect_area_entered"]
-[connection signal="animation_finished" from="enemy/AnimationPlayer" to="enemy" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="enemy2/head_detect" to="enemy2" method="_on_head_detect_body_entered"]
-[connection signal="timeout" from="enemy2/Timer" to="enemy2" method="_on_timer_timeout"]
-[connection signal="body_entered" from="enemy2/player_detect" to="enemy2" method="_on_player_detect_body_entered"]
-[connection signal="area_entered" from="enemy2/block_detect" to="enemy2" method="_on_block_detect_area_entered"]
-[connection signal="animation_finished" from="enemy2/AnimationPlayer" to="enemy2" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="enemy3/head_detect" to="enemy3" method="_on_head_detect_body_entered"]
-[connection signal="timeout" from="enemy3/Timer" to="enemy3" method="_on_timer_timeout"]
-[connection signal="body_entered" from="enemy3/player_detect" to="enemy3" method="_on_player_detect_body_entered"]
-[connection signal="area_entered" from="enemy3/block_detect" to="enemy3" method="_on_block_detect_area_entered"]
-[connection signal="animation_finished" from="enemy3/AnimationPlayer" to="enemy3" method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="enemy7/head_detect" to="enemy7" method="_on_head_detect_body_entered"]
-[connection signal="timeout" from="enemy7/Timer" to="enemy7" method="_on_timer_timeout"]
-[connection signal="body_entered" from="enemy7/player_detect" to="enemy7" method="_on_player_detect_body_entered"]
-[connection signal="area_entered" from="enemy7/block_detect" to="enemy7" method="_on_block_detect_area_entered"]
-[connection signal="animation_finished" from="enemy7/AnimationPlayer" to="enemy7" method="_on_animation_player_animation_finished"]
+[node name="enemy3" parent="." instance=ExtResource("9_6cvei")]
+position = Vector2(640, -2150)
 
 [editable path="Camera2D/PauseMenu"]
+[editable path="enemy4"]
+[editable path="enemy5"]
+[editable path="enemy6"]
+[editable path="enemy"]
+[editable path="enemy2"]
+[editable path="enemy3"]

@@ -197,6 +197,7 @@ libraries = {
 
 [node name="fall" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_j15uc")
+volume_db = -12.0
 autoplay = true
 bus = &"SFX"
 
