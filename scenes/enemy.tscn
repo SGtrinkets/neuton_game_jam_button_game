@@ -10,7 +10,7 @@ size = Vector2(23, 18)
 size = Vector2(18, 4.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(175, 202)
+size = Vector2(797.25, 277)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uy6h"]
 size = Vector2(20, 16.5)
@@ -49,7 +49,7 @@ wait_time = 3.0
 [node name="player_detect" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_detect"]
-position = Vector2(3, 120)
+position = Vector2(3, 155.5)
 shape = SubResource("RectangleShape2D_md0e3")
 
 [node name="block_detect" type="Area2D" parent="."]
@@ -66,5 +66,5 @@ libraries = {
 [connection signal="body_entered" from="head_detect" to="." method="_on_head_detect_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="player_detect" to="." method="_on_player_detect_body_entered"]
-[connection signal="body_entered" from="block_detect" to="." method="_on_block_detect_body_entered"]
+[connection signal="area_entered" from="block_detect" to="." method="_on_block_detect_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

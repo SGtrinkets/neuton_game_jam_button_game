@@ -8,6 +8,7 @@ var levels = {1 : "res://scenes/level_1.tscn", 2 : "res://scenes/level_2.tscn", 
 func _ready() -> void:
 	GameState.set_value("level", GameState.get_value("level") + 1)
 	music.play()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

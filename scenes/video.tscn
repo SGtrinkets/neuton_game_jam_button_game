@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1swcboeeifge"]
+
+[ext_resource type="Script" uid="uid://befqrnugvbcbv" path="res://scripts/video.gd" id="1_gas8c"]
+[ext_resource type="FontFile" uid="uid://dkxfstws7ia8r" path="res://assets/Xav_button_font-Regular.ttf" id="2_6u8pv"]
+[ext_resource type="Texture2D" uid="uid://5t2op2o8gn2p" path="res://assets/arrow-icon-pixel-arrow-icon-8bit-arrow-png.webp" id="3_m7b26"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_7u4yf"]
+file = "assets/The-Blue-Mennace-Intro-V3.ogv"
+
+[node name="Video" type="Node2D"]
+script = ExtResource("1_gas8c")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 1280.0
+offset_bottom = 720.0
+scale = Vector2(0.667, 0.667)
+stream = SubResource("VideoStreamTheora_7u4yf")
+autoplay = true
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(150, 236)
+scale = Vector2(1.62, 1.62)
+
+[node name="Label" type="Label" parent="Node2D"]
+texture_filter = 1
+offset_right = 53.0
+offset_bottom = 35.0
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_6u8pv")
+theme_override_font_sizes/font_size = 21
+text = "Press enter to skip
+"
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(254.321, 46.2963)
+scale = Vector2(0.418272, 0.315)
+texture = ExtResource("3_m7b26")
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]

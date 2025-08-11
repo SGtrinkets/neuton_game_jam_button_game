@@ -15,6 +15,7 @@ var friction : float = 10.0
 @onready var footstep_timer : Timer = $footstep_timer
 
 const level_complete = preload("res://scenes/level_complete.tscn")
+const death_menu = preload("res://scenes/death_menu.tscn")
 const game_complete = preload("res://scenes/game_complete.tscn")
 #const death = preload("res://scenes/level_1.tscn")
 
@@ -33,6 +34,11 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()               # Keep physics stable
 		animation_player.play("victory")
 		return                         # Skip the rest of the code
+	
+	if GameState.get_value("dead"):
+		velocity = Vector2.ZERO        # Freeze velocity
+		move_and_slide()
+		return 
 	
 	var x_input : float = Input.get_action_strength("right") - Input.get_action_strength("left")
 	var velocity_weight : float = delta * (acceleration if x_input else friction)
@@ -71,10 +77,23 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		get_tree().change_scene_to_packed(level_complete)
 	elif anim_name == "victory" and GameState.get_value("level") == 3:
 		get_tree().change_scene_to_packed(game_complete)
+	elif anim_name == "death":
+		get_tree().change_scene_to_packed(death_menu)
+		
 
 func _on_area_collision_body_entered(body: Node2D) -> void:
 	if body.is_in_group("lava"):
-		animation_player.play()
+		animation_player.play("death")
+		GameState.set_value("dead", true)
+		print("lava body detected")
 	if body.is_in_group("enemy"):
 		if velocity.y > 0:
 			velocity.y = bonus_jump_height
+
+#THIS IS WHAT ACTUALLY IS DETECTING STUFF
+func _on_area_collision_area_entered(area: Area2D) -> void:
+	if area.is_in_group("lava") or area.is_in_group("bomb"):
+		animation_player.play("death")
+		GameState.set_value("dead", true)
+	if area.is_in_group("enemy"):
+		velocity.y = bonus_jump_height

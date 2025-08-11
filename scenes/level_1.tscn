@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://br0irwu2oprxt"]
+[gd_scene load_steps=10 format=4 uid="uid://br0irwu2oprxt"]
 
 [ext_resource type="Script" uid="uid://beh7qa2kvare7" path="res://scripts/level_1.gd" id="1_4nkto"]
 [ext_resource type="PackedScene" uid="uid://nu6oc5ahkq2h" path="res://scenes/tileset_dev.tscn" id="2_4nkto"]
@@ -8,10 +8,7 @@
 [ext_resource type="Script" uid="uid://wprsld8plqpc" path="res://scripts/camera.gd" id="5_fcfvj"]
 [ext_resource type="PackedScene" uid="uid://doki8r0mndhmf" path="res://scenes/lava.tscn" id="7_pa8r4"]
 [ext_resource type="PackedScene" uid="uid://dko7omtpisi4j" path="res://scenes/flag.tscn" id="8_15mv3"]
-[ext_resource type="PackedScene" uid="uid://dvojk1y6sxmua" path="res://scenes/enemy.tscn" id="9_e3sih"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_15mv3"]
-viewport_path = NodePath("MarginContainer/pause/SubViewport")
+[ext_resource type="AudioStream" uid="uid://c28c26fm7e7ct" path="res://sounds/BGM/Gameplay BGM.wav" id="9_e3sih"]
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_4nkto")
@@ -38,6 +35,10 @@ position_smoothing_enabled = true
 editor_draw_limits = true
 script = ExtResource("5_fcfvj")
 
+[node name="music" type="AudioStreamPlayer2D" parent="Camera2D"]
+position = Vector2(-640, -360)
+stream = ExtResource("9_e3sih")
+
 [node name="PauseMenu" parent="Camera2D" instance=ExtResource("4_5xbjy")]
 process_mode = 3
 visible = false
@@ -53,23 +54,15 @@ size_flags_vertical = 4
 offset_top = -212.0
 offset_bottom = 212.0
 
-[node name="picture" parent="Camera2D/PauseMenu" index="1"]
-texture = SubResource("ViewportTexture_15mv3")
-
 [node name="player" parent="." instance=ExtResource("3_rus8k")]
 position = Vector2(616, 562)
 
 [node name="lava" parent="." instance=ExtResource("7_pa8r4")]
-visible = false
 position = Vector2(0, 705)
 rising_speed = 20
 
 [node name="flag" parent="." instance=ExtResource("8_15mv3")]
 position = Vector2(650, -3024)
 scale = Vector2(2, 2)
-
-[node name="enemy" parent="." instance=ExtResource("9_e3sih")]
-position = Vector2(987, 561)
-scale = Vector2(2.24, 2.24)
 
 [editable path="Camera2D/PauseMenu"]

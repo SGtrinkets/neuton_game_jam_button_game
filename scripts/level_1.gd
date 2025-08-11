@@ -5,6 +5,7 @@ extends Node2D
 @onready var retry : Button = $Camera2D/PauseMenu/MarginContainer/pause/retry_current_level
 @onready var menu : Button = $Camera2D/PauseMenu/MarginContainer/pause/main_menu
 @onready var camera : Camera2D = $Camera2D
+@onready var music : AudioStreamPlayer2D = $Camera2D/music
 
 var options_dup = load("res://scenes/options_dup.tscn")
 var retry_dup = load("res://scenes/retry_dup.tscn")
@@ -15,6 +16,8 @@ var buttons_set : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	music.play()
+	GameState.set_value("dead", false)
 	GameState.set_value("pause", false)
 	GameState.set_value("button_set", false)
 	GameState.set_value("goal_reached", false)
@@ -22,6 +25,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if GameState.get_value("dead") or GameState.get_value("goal_reached"):
+		music.stop()
+	
 	pause.global_position = camera.global_position
 	if GameState.get_value("button_set") == true:
 		instance = options_dup.instantiate()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dio4ll0sqo0k5"]
+[gd_scene load_steps=6 format=3 uid="uid://dio4ll0sqo0k5"]
 
 [ext_resource type="Texture2D" uid="uid://c4lfk1h8p8wyu" path="res://assets/Level_Completed_Blank.png" id="1_hhoem"]
 [ext_resource type="Script" uid="uid://bbsbfxbnv3uua" path="res://scripts/level_complete.gd" id="1_rovvh"]
 [ext_resource type="FontFile" uid="uid://dkxfstws7ia8r" path="res://assets/Xav_button_font-Regular.ttf" id="2_4x1ak"]
 [ext_resource type="Theme" uid="uid://758a86rjoymm" path="res://assets/theme.tres" id="4_3oeyx"]
+[ext_resource type="AudioStream" uid="uid://bf44xutpy6l5w" path="res://sounds/BGM/Title Screen BGM.wav" id="5_3oeyx"]
 
 [node name="level_complete" type="Control"]
 layout_mode = 3
@@ -68,6 +69,7 @@ theme = ExtResource("4_3oeyx")
 text = "back to main menu"
 
 [node name="level_complete_music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_3oeyx")
 bus = &"Music"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/next_level" to="." method="_on_next_level_pressed"]

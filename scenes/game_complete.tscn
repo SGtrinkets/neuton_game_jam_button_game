@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://rkge1bnlin58"]
+[gd_scene load_steps=11 format=3 uid="uid://rkge1bnlin58"]
 
 [ext_resource type="Script" uid="uid://bn8cjnuh4jtyc" path="res://scripts/game_complete.gd" id="1_d1qp4"]
 [ext_resource type="Texture2D" uid="uid://1ugd6xiwfwa5" path="res://assets/Victory_Screen_Blank.png" id="1_rqthc"]
 [ext_resource type="FontFile" uid="uid://dkxfstws7ia8r" path="res://assets/Xav_button_font-Regular.ttf" id="2_d1qp4"]
 [ext_resource type="Theme" uid="uid://758a86rjoymm" path="res://assets/theme.tres" id="3_fdoju"]
 [ext_resource type="AudioStream" uid="uid://ctp0serc50mpe" path="res://sounds/BGM/Game Complete BGM V5.wav" id="5_fdoju"]
+[ext_resource type="AudioStream" uid="uid://dihys3oqnsuno" path="res://sounds/SFX/Vine Boom.mp3" id="6_hydus"]
+[ext_resource type="Texture2D" uid="uid://b2ldpdybgvnwq" path="res://assets/The_Blue_Rizzler.png" id="7_ul8ck"]
 
 [sub_resource type="Animation" id="Animation_hydus"]
 length = 0.001
@@ -32,6 +34,90 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("mog:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.646)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LevelCompletedBlank:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Label:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasLayer:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("menu:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_hmvr6"]
 resource_name = "game_complete"
@@ -44,7 +130,7 @@ tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
@@ -56,7 +142,116 @@ tracks/1/path = NodePath("celebration_theme:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(2.4, 2.5),
+"times": PackedFloat32Array(0, 0.0999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("mog:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(12.3, 12.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(12.5, 12.6, 13.2871),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.646), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label:text")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(12.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["thank you
+for playing"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(12.6),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(424, 140)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("LevelCompletedBlank:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(12.588, 12.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 38.122, 1), Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Label2:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(12.5, 12.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Label:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(12.5, 12.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CanvasLayer:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(5, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("menu:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(12.5, 12.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -78,22 +273,27 @@ grow_vertical = 2
 script = ExtResource("1_d1qp4")
 
 [node name="LevelCompletedBlank" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(641.523, 360.398)
 scale = Vector2(0.676, 0.675)
 texture = ExtResource("1_rqthc")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -66.0
-offset_top = 140.0
-offset_right = 66.0
-offset_bottom = 163.0
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -220.0
+offset_right = 229.0
+offset_bottom = -53.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.706349, 0.722496, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 10
 theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 10
 theme_override_fonts/font = ExtResource("2_d1qp4")
@@ -102,28 +302,30 @@ text = "thank you
 for playing"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Label2" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -103.0
-offset_top = -24.0
-offset_right = 103.0
-offset_bottom = 169.0
+offset_left = -222.0
+offset_top = -154.0
+offset_right = 223.0
+offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 35
-
-[node name="menu" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("3_fdoju")
-text = "back to main menu"
+theme_override_colors/font_color = Color(0.706349, 0.722496, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 10
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("2_d1qp4")
+theme_override_font_sizes/font_size = 51
+text = "congrats
+you escaped
+the blue box"
+horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -132,10 +334,33 @@ libraries = {
 
 [node name="celebration_theme" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_fdoju")
+bus = &"Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 1290.0
 offset_bottom = 724.0
 color = Color(0, 0, 0, 1)
+
+[node name="menu" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 493.0
+offset_top = 424.0
+offset_right = 787.0
+offset_bottom = 503.0
+theme = ExtResource("3_fdoju")
+text = "back to main menu"
+
+[node name="mog" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_hydus")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.646)
+position = Vector2(662, 335)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_ul8ck")
+
+[connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]

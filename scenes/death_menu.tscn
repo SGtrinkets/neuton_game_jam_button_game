@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://sv4c5jd3v5p3"]
+[gd_scene load_steps=12 format=3 uid="uid://sv4c5jd3v5p3"]
 
 [ext_resource type="Script" uid="uid://8exkp78vn60b" path="res://scripts/death_menu.gd" id="1_vqs20"]
 [ext_resource type="Texture2D" uid="uid://c5e8m0cxoqapg" path="res://assets/Game_Over.png" id="2_20fbl"]
 [ext_resource type="FontFile" uid="uid://dkxfstws7ia8r" path="res://assets/Xav_button_font-Regular.ttf" id="3_uldby"]
 [ext_resource type="Texture2D" uid="uid://w48o4va3uk5d" path="res://assets/button_default.png" id="4_tie44"]
+[ext_resource type="AudioStream" uid="uid://bepujcg5bdvdx" path="res://sounds/BGM/Game Over BGM.wav" id="5_20fbl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njm3g"]
 content_margin_left = 4.0
@@ -138,7 +139,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_f85wd")
 theme_override_font_sizes/font_size = 16
-text = "next level"
+text = "retry level"
 
 [node name="menu" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -147,7 +148,8 @@ theme = SubResource("Theme_f85wd")
 theme_override_font_sizes/font_size = 16
 text = "back to main menu"
 
-[node name="level_complete_music" type="AudioStreamPlayer2D" parent="."]
+[node name="death_music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_20fbl")
 bus = &"Music"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/retry_level" to="." method="_on_retry_level_pressed"]

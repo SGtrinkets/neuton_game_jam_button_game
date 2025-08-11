@@ -3,11 +3,9 @@
 [ext_resource type="Script" uid="uid://caa3fw1c8ve2h" path="res://scripts/audio.gd" id="1_68h54"]
 [ext_resource type="Script" uid="uid://bh31vsgjjxmov" path="res://scripts/pause_menu.gd" id="1_c8mr8"]
 [ext_resource type="Theme" uid="uid://758a86rjoymm" path="res://assets/theme.tres" id="2_kukqi"]
+[ext_resource type="FontFile" uid="uid://dkxfstws7ia8r" path="res://assets/Xav_button_font-Regular.ttf" id="3_5d2l8"]
 
 [sub_resource type="Theme" id="Theme_eguqy"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_kukqi"]
-viewport_path = NodePath("MarginContainer/pause/SubViewport")
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -56,11 +54,13 @@ text = "Retry Level"
 [node name="main_menu" type="Button" parent="MarginContainer/pause"]
 texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("2_kukqi")
 theme_override_font_sizes/font_size = 30
 text = "Main Menu"
 
 [node name="option_menu" type="VBoxContainer" parent="MarginContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -91,11 +91,19 @@ theme_override_font_sizes/font_size = 30
 text = "Back to Pause"
 
 [node name="audio_menu" type="VBoxContainer" parent="MarginContainer"]
-visible = false
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 30
 
 [node name="Label" type="Label" parent="MarginContainer/audio_menu"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.603922, 0.556863, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("3_5d2l8")
+theme_override_font_sizes/font_size = 26
 text = "Master "
 
 [node name="Master" type="HSlider" parent="MarginContainer/audio_menu"]
@@ -107,6 +115,12 @@ bus_name = "Master"
 
 [node name="Label2" type="Label" parent="MarginContainer/audio_menu"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.603922, 0.556863, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("3_5d2l8")
+theme_override_font_sizes/font_size = 26
 text = "SFX"
 
 [node name="SFX" type="HSlider" parent="MarginContainer/audio_menu"]
@@ -118,9 +132,15 @@ bus_name = "SFX"
 
 [node name="Label3" type="Label" parent="MarginContainer/audio_menu"]
 layout_mode = 2
-text = "Ambience"
+theme_override_colors/font_color = Color(0.603922, 0.556863, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("3_5d2l8")
+theme_override_font_sizes/font_size = 26
+text = "Music"
 
-[node name="Ambience" type="HSlider" parent="MarginContainer/audio_menu"]
+[node name="Music" type="HSlider" parent="MarginContainer/audio_menu"]
 layout_mode = 2
 max_value = 1.0
 step = 0.001
@@ -129,6 +149,8 @@ bus_name = "Ambience"
 
 [node name="back_to_options" type="Button" parent="MarginContainer/audio_menu"]
 layout_mode = 2
+theme = ExtResource("2_kukqi")
+theme_override_font_sizes/font_size = 16
 text = "Back to Options"
 
 [node name="control_menu" type="Control" parent="MarginContainer"]
@@ -148,26 +170,25 @@ offset_right = 249.0
 offset_bottom = 186.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 75
 
-[node name="Label" type="Label" parent="MarginContainer/control_menu/VBoxContainer"]
+[node name="control_keys" type="Label" parent="MarginContainer/control_menu/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.603922, 0.556863, 1, 1)
 theme_override_constants/outline_size = 10
-text = "Forward: W
-Backwards: S
-Left: A
-Right: D
-Interact: E
-Shoot: Left Click
-Silent Crouch: Left Shift
-Pause: Esc"
+theme_override_fonts/font = ExtResource("3_5d2l8")
+text = "Left:    A / Left Arrow key
+Right:    D / Right Arrow key
+Jump:    W / Up Arrow key
+Pause:    Esc"
 horizontal_alignment = 1
 
 [node name="back_to_options" type="Button" parent="MarginContainer/control_menu/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_kukqi")
+theme_override_font_sizes/font_size = 16
 text = "Back to Options"
-
-[node name="picture" type="Sprite2D" parent="."]
-texture = SubResource("ViewportTexture_kukqi")
 
 [connection signal="pressed" from="MarginContainer/pause/options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/pause/retry_current_level" to="." method="_on_retry_current_level_pressed"]

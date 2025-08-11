@@ -5,12 +5,24 @@ extends Control
 @onready var option_menu: VBoxContainer = $MarginContainer/option_menu
 @onready var audio_menu: VBoxContainer = $MarginContainer/audio_menu
 @onready var control_menu: Control = $MarginContainer/control_menu
+var levels = {1 : "res://scenes/level_1.tscn", 2 : "res://scenes/level_2.tscn", 3 : "res://scenes/level_3.tscn"}
 
 # Buttons to capture
 @onready var buttons := [
-	$"MarginContainer/option_menu/audio",
-	$"MarginContainer/option_menu/controls",
-	$"MarginContainer/option_menu/back_to_pause_menu"
+	$MarginContainer/pause/options,
+	$MarginContainer/pause/retry_current_level,
+	$MarginContainer/pause/main_menu,
+	$MarginContainer/option_menu/audio,
+	$MarginContainer/option_menu/controls,
+	$MarginContainer/option_menu/back_to_pause_menu,
+	$MarginContainer/audio_menu/back_to_options,
+	$MarginContainer/audio_menu/Label,
+	$MarginContainer/audio_menu/Master,
+	$MarginContainer/audio_menu/Label2,
+	$MarginContainer/audio_menu/SFX,
+	$MarginContainer/audio_menu/Label3,
+	$MarginContainer/audio_menu/Music,
+	$MarginContainer/control_menu/VBoxContainer/control_keys
 ]
 
 var output_dir := "res://assets/"
@@ -19,6 +31,7 @@ var output_dir := "res://assets/"
 func _ready() -> void:
 	pause_menu.hide()
 	pause.hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Engine.time_scale = 1
 	option_menu.hide()
 	audio_menu.hide()
@@ -37,7 +50,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") and !GameState.get_value("dead") and !GameState.get_value("goal_reached"):
 		pauseMenu()
 
 func pauseMenu():
@@ -51,6 +64,9 @@ func pauseMenu():
 	else:
 		pause_menu.show()
 		pause.show()
+		option_menu.hide()
+		audio_menu.hide()
+		control_menu.hide()
 		Engine.time_scale = 0
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
@@ -74,7 +90,8 @@ func _on_options_pressed() -> void:
 
 
 func _on_retry_current_level_pressed() -> void:
-	pass
+	var level = levels[GameState.get_value("level")]
+	get_tree().change_scene_to_file(level)
 
 
 func _on_main_menu_pressed() -> void:
