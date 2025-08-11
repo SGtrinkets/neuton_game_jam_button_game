@@ -22,10 +22,11 @@ stream = SubResource("VideoStreamTheora_7u4yf")
 autoplay = true
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(150, 236)
-scale = Vector2(1.62, 1.62)
+position = Vector2(308, 269)
+scale = Vector2(1.095, 1.095)
 
 [node name="Label" type="Label" parent="Node2D"]
+self_modulate = Color(1, 1, 1, 0.607843)
 texture_filter = 1
 offset_right = 53.0
 offset_bottom = 35.0
@@ -36,6 +37,7 @@ text = "Press enter to skip
 "
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+self_modulate = Color(1, 1, 1, 0.607843)
 texture_filter = 1
 position = Vector2(254.321, 46.2963)
 scale = Vector2(0.418272, 0.315)
